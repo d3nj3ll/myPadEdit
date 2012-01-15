@@ -20,9 +20,10 @@ WORDS TO LIVE BY:
 
 DISCLAIMER!!!
 =============
-# this will probably not work for you yet, because it is part of a package using CYDIA, LIGHTTPD and PHP. 
-once i get it up and running smoothly, I will post more specifics, like the lighty config, for example. 
-as a matter of fact, for all practical purposes, you can consider this to be broken for the moment.
+# this will probably not work for you yet, because it is part of a package using CYDIA, LIGHTTPD and PHP. once i get it up and running smoothly, I will post more specifics, like the lighty config, for example. as a matter of fact, for all practical purposes, you can consider this to be broken for the moment.
+# using this on a server with outside access is VERY dangerous, because there is no longer any password protection and anyone
+that finds the script can modify your 755 files... i repeat: this is ONLY to be run on an iPad server.
+
 
 Installed Packages
 ------------------
