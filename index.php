@@ -15,6 +15,7 @@
 /*
 / Do we need this kind of pseudo security on our own device?
 / It is unnecesary codebulk that inludes extra files. Weg damit.
+/ Remember what denjell says: "A cycle saved is cache earned."
 
 / LIGHTTD CONFIG ISSUES
  PHP must work.
@@ -27,7 +28,6 @@
 PERFORMANCE ISSUES
 / Write some pragmacache headers to prevent reloading the page EVER
 / Put useless code in other include files so the tree can remain stable .
-/ Remember what denjell says: "A cycle saved is cache earned."
 / NOTIFY WINDOW OF ITS REALM AND USER
 
 / add a GET_['realm'] key for something like: 
@@ -41,13 +41,7 @@ PERFORMANCE ISSUES
 */ 
 
 
-/*
-//check for PHP 5 --> is no longer needed as because it is done in the make process.
-$phpversion = floatval(phpversion());
-if ($phpversion < 5) {
-	die("Sorry, but PHP version 5 or above is required to use PadEdit.");
-}
-*/
+//check for PHP 5 --> has been moved to hosted.php 
 
 //define a version, we can also use this to prevent direct access to component scripts.
 define('PADEDIT_VERSION', '1.3');
@@ -57,59 +51,33 @@ $version = PADEDIT_VERSION;
 $editfile = null;
 $safety = false;
 
-//Start session
+//Start session -> do we need this anymore???
 session_set_cookie_params('0','/', null , false, true); 
 session_start(); 
+
+/*
+// switch it up if user is on localhost
+if ($_GLOBAL['server_uri'] === 'localhost'){
+  require_once('system/localhost.php'); //extra features like BASH, etc.
+
+}else{ 
+  require_once('system/server.php'); //the login stuff and php5 checking for non-localhost servers
+}
+*/
 
 require_once("system/functions.php"); // core system object
 $p = new padedit;
 
-/*
-//are we logged in? has been removed because we are running on a local system
-// and a different type of identification has been chosen.
 
-
-if (@$_SESSION["authorised"] === true ) { 
-	//yes we are, but....
-	//have they timed out?
-	$lastActive = $_SESSION['lastActive'];
-	// time limit in which they must log in again.
-	$timeLimit = 1800; // 30 minutes. 
-	
-	//if they havent used the app in 30 minutes, make them log in again
-	if (time() > ($lastActive + $timeLimit)   ){
-		$loggedin = false;
-	}else {
-    	$loggedin = true; 
-    	//update the last active time
-    	$_SESSION['lastActive'] = time();
-	}
-}else {
-	$loggedin = false;
-}
-
-
-if (!$loggedin) { 
-	//checks to see if we need to run the setup, and runs it if we do.
-	$setup = $p->checkSetup();
-
-	if ($setup == true){
-		//true, we need to run the setup
-		$action = 'setup';
-	} else {
-		//otherwise make the user login.
-		$p->login();
-		$action = 'login';
-	}
-}
 
 
 //controller section. works out what the user is trying to do and performs the necessary functions
 
 
 // things we can only do if we are logged in
+-> is carried over for the time being, will migrate to localhost.php and server.php
 if ($loggedin){
-*/
+
 	// save file
     if (isset($_GET['save'])) { 
     	$message = $p->saveFile();
