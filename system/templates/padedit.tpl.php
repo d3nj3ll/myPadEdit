@@ -25,15 +25,20 @@ switch ($action) {
 		<html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- The following META AND LINK tags are for turning this into a native-looking APP-->
+
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" /> <!-- pick one or make one -->
+<link rel="apple-touch-startup-image" href="./startup.png" /> <!-- must be 1024x768 -->
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
 
-		<title>Welcome to PadEdit</title>
+		<title>PadEdit</title>
 		<link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-				$("#password").focus();
+				 $("#password").focus();
 			});
 		</script>
 		</head>
