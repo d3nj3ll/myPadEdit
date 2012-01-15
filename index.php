@@ -27,8 +27,9 @@
 
 PERFORMANCE ISSUES
 / Write some pragmacache headers to prevent reloading the page EVER
-/ Put useless code in other include files so the tree can remain stable .
+/ Put useless code in other include files so the tree can remain stable.
 / NOTIFY WINDOW OF ITS REALM AND USER
+/ Home is where node.js lives.
 
 / add a GET_['realm'] key for something like: 
  http://localhost:8120/?realm=/Applications/81FB3553-07D0-4611-9A6A-CF49AF43E96B/
@@ -38,10 +39,12 @@ PERFORMANCE ISSUES
  chmod 755 $file 
  spin up another lighttd server for root / other user / other realm
  curl website, script etc.
+
+/ FILE PROTECTION
+ i suggest we use two internal tags:
+ %system% and %protected% (system cannot edit %system% files, but user can override %protected%
+ would also be nice to display a lock on the protected file in the list.
 */ 
-
-
-//check for PHP 5 --> has been moved to hosted.php 
 
 //define a version, we can also use this to prevent direct access to component scripts.
 define('PADEDIT_VERSION', '1.3');
@@ -75,7 +78,8 @@ $p = new padedit;
 
 
 // things we can only do if we are logged in
--> is carried over for the time being, will migrate to localhost.php and server.php
+$loggedin=1;
+// -> is carried over for the time being, will migrate to localhost.php and server.php, perhaps base.php
 if ($loggedin){
 
 	// save file
@@ -162,6 +166,12 @@ if ($loggedin){
 	}
 
 	//check if they should be editing this file
+
+/*
+also an important feature, that I would sometimes like to override.
+see notes above.
+*/
+
 	if ($fileDetails['protected'] == true ) { 
 		$safety = true;
 		$fileLoaded = false;
@@ -179,12 +189,11 @@ if ($loggedin){
     		//$safety = true;
     		$fileLoaded = false;
     		$editfile =  '';
-    		$message = "Sorry, You can't edit this type of file";
+    		$message = "Sorry, You can't edit this type of file."; // 
+
 		}
-		
 	}
-	
-// } -> end of is logged in
+}
 
 // load the template
 require_once("system/templates/padedit.tpl.php");
