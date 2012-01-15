@@ -216,7 +216,7 @@ if ($loggedin){
 		
 	}
 	
-}
+// } -> end of is logged in
 
 // load the template
 require_once("system/templates/padedit.tpl.php");
