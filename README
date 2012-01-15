@@ -11,7 +11,9 @@
 
 DISCLAIMER!!!
 =============
-# this will probably not work for you yet, because it is part of a package using CYDIA, LIGHTPPD and PHP. once i get it up and running smoothly, I will post more specifics, like the lighty config, and other packages you'll need to have installed. as a matter of fact, for all practical purposes, you can consider this to be broken for the moment.
+# this will probably not work for you yet, because it is part of a package using CYDIA, LIGHTPPD and PHP. 
+once i get it up and running smoothly, I will post more specifics, like the lighty config, for example. 
+as a matter of fact, for all practical purposes, you can consider this to be broken for the moment.
 
 Installed Packages
 ------------------
