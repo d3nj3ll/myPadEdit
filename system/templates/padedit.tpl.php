@@ -1,4 +1,4 @@
-<?php // %protect%
+<?php // %protect% %system%
 
 /*
  * PadEdit
@@ -17,25 +17,30 @@ if (!defined('PADEDIT_VERSION')){
 	exit;
 }
 
-switch ($action) {
-
-	case 'setup' :
-	// HTML to set up new password
-	?>	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+//the following head is used regardless of the action in order to streamline this script.
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 		<html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- The following META AND LINK tags are for turning this into a native-looking APP-->
 
-<link rel="apple-touch-icon" href="./apple-touch-icon.png" /> <!-- pick one or make one -->
-<link rel="apple-touch-startup-image" href="./startup.png" /> <!-- must be 1024x768 -->
+                <link rel="apple-touch-icon" href="./apple-touch-icon.png" /> <!-- pick one or make one -->
+                <link rel="apple-touch-startup-image" href="./startup.png" /> <!-- must be 1024x768 -->
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
-
-		<title>PadEdit</title>
-		<link href="system/styles.css" rel="stylesheet" type="text/css" />
+                <link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+<?php
+switch ($action) {
+
+	case 'setup' :
+	// HTML to set up new password
+	?>	
+
+		<title>Welcome to PadEdit</title>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				 $("#password").focus();
@@ -65,8 +70,6 @@ switch ($action) {
 			<p align="center" style="color:gray;"><?php echo "v" . $version; ?></p>
 		
 		</div>
-		</body>
-		</html>
 		
 		<?php 
 	
@@ -75,14 +78,8 @@ switch ($action) {
 	
 	case 'login' :  
 	// HTML for a regular log in (that is, the user is already set up)
-	 ?>	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml">
-		<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name = "viewport" content = "user-scalable=no, width=device-width">
+	 ?>	
 		<title>PadEdit &middot; <?php echo $_SERVER['HTTP_HOST']; ?></title>
-		<link href="system/styles.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$("#password").focus();
@@ -105,8 +102,6 @@ switch ($action) {
 			</form>
 			<p align="center" style="color:gray;"><?php echo "v". $version; ?></p>
 		</div>
-		</body>
-		</html>
 		<?php 
 	
 		break;
@@ -122,14 +117,8 @@ switch ($action) {
 		
 	case 'editor' : 	
 		
-	?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-	<html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name = "viewport" content = "user-scalable=no, width=device-width">
+	?>
 	<title>PadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
-	<link href="system/styles.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="system/js/jquery-linedtextarea.js"></script>
 	<script type="text/javascript" src="system/js/editor.js"></script>
 	<script type="text/javascript">
@@ -286,8 +275,6 @@ switch ($action) {
 	
 	<!-- end popups -->
 	
-	</body>
-	</html>
 	<?php 
 	
 	break;
@@ -295,3 +282,6 @@ switch ($action) {
 }
 
 ?>
+
+	</body>
+	</html>
