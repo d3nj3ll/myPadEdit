@@ -33,91 +33,6 @@ if (!defined('PADEDIT_VERSION')){
                 <link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
-<?php
-switch ($action) {
-
-	case 'setup' :
-	// HTML to set up new password
-	?>	
-
-		<title>Welcome to PadEdit</title>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				 $("#password").focus();
-			});
-		</script>
-		</head>
-		<body>
-		<div style="width: 350px; margin: 30px auto;">
-			<form id="login" action="index.php?setpassword=true" method="post">
-				<div align="center"><img src="system/images/padedit_logo.png" alt="PadEdit" width="370" height="166" /></div>
-				<?php if (isset($_GET['perm'])) { ?>
-					<div class="error">Oops! Make sure both passwords match.</div>
-				<?php } ?>
-				
-				<?php if (isset($_GET['fail'])) { ?>
-					<div class="error">Before setting a password, make sure permissions for the PadEdit's parent folder is at least octal 755.</div>
-				<?php } ?>
-				<p align="center" style="margin-bottom: 20px;">Howdy! Choose a password, and you're all ready to go.</p>
-				<fieldset>
-					<p><label for="password">Password</label><br/>
-					<input type="password" class="title" name="password" id="password"/></p>	
-					<p><label for="confirmpassword">Confirm Password</label><br/>
-					<input type="password" class="title" name="confirmpassword" id="confirmpassword"/></p>			
-					<p><input type="submit" value="Set Password"/></p>
-				</fieldset>
-			</form>
-			<p align="center" style="color:gray;"><?php echo "v" . $version; ?></p>
-		
-		</div>
-		
-		<?php 
-	
-		break;
-	
-	
-	case 'login' :  
-	// HTML for a regular log in (that is, the user is already set up)
-	 ?>	
-		<title>PadEdit &middot; <?php echo $_SERVER['HTTP_HOST']; ?></title>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$("#password").focus();
-			});
-		</script>
-		</head>
-		<body>
-		<div style="width: 350px; margin: 30px auto;">
-			<form id="login" action="index.php?login=true" method="post">
-				<div align="center"><img src="system/images/padedit_logo.png" alt="PadEdit" width="370" height="166" /></div>
-				<?php if (isset($_GET['fail'])) { ?>
-					<div class="error">Sorry, your username and/or password was incorrect.</div>
-				<?php } ?>
-				<p align="center" style="margin-bottom: 20px;">Type your password to log in.</p>
-				<fieldset>
-					<p><label for="password">Password</label><br/>
-					<input type="password" class="title" name="password" id="password"/></p>			
-					<p><input type="submit" value="Log in"/></p>
-				</fieldset>
-			</form>
-			<p align="center" style="color:gray;"><?php echo "v". $version; ?></p>
-		</div>
-		<?php 
-	
-		break;
-	 // end of login bits.
-	
-	
-	
-	
-	
-		
-	// user is logged in; editor	
-	
-		
-	case 'editor' : 	
-		
-	?>
 	<title>PadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
 	<script type="text/javascript" src="system/js/jquery-linedtextarea.js"></script>
 	<script type="text/javascript" src="system/js/editor.js"></script>
@@ -274,14 +189,6 @@ switch ($action) {
 	</div>
 	
 	<!-- end popups -->
-	
-	<?php 
-	
-	break;
-
-}
-
-?>
 
 	</body>
 	</html>
