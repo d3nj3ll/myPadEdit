@@ -1,13 +1,22 @@
 ####################################################
 #
+# myPadEdit
+#
 # expeRimEntAL fork
 #  of PadEdit 
 #  -> The IDE made for your iPad's Server/
 # 
 ####################################################
 
-# but why another text editor? because none of the free ones work for coding.
+# but why another text editor? because none of the free ones work for me.
 # why on localhost? some things should still be private.
+# is it faster? it lives on a lighttpd server running php - on your iThing, behind a firewall.
+# is it against the law? no, jailbreaking is legal, stealing software is against the law.
+
+WORDS TO LIVE BY:
+-----------------
+# reclaim your filesystem, whatever it is.
+# do it for the community, do it for better code.
 
 DISCLAIMER!!!
 =============
