@@ -26,6 +26,8 @@ switch ($action) {
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+
 		<title>Welcome to PadEdit</title>
 		<link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
