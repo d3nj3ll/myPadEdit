@@ -6,18 +6,50 @@
  * Licensed under the GPL license.
  * http://www.gnu.org/licenses/gpl.txt
  *
- * Date: 2010-12-25
- * Version: 1.3
+ * Date: 2012-1-15
+ * Version: 1.3-1
  *
  */
  
-//check for PHP 5
+
+/*
+/ Do we need this kind of pseudo security on our own device?
+/ It is unnecesary codebulk that inludes extra files. Weg damit.
+
+/ LIGHTTD CONFIG ISSUES
+ PHP must work.
+ To be secure, it is better to write the server configs securely.
+ This may mean using a certain port for root and otherwise doing it with just webuser...
+ use service patching in the lighttd config file:
+ http://localhost:8120/Applications/81FB3553-07D0-4611-9A6A-CF49AF43E96B/?newfolder=assets&chmod=755
+ can use the device id as a cross-check to find out if browser on localhost isIpad()? 
+
+PERFORMANCE ISSUES
+/ Write some pragmacache headers to prevent reloading the page EVER
+/ Put useless code in other include files so the tree can remain stable .
+/ Remember what denjell says: "A cycle saved is cache earned."
+/ NOTIFY WINDOW OF ITS REALM AND USER
+
+/ add a GET_['realm'] key for something like: 
+ http://localhost:8120/?realm=/Applications/81FB3553-07D0-4611-9A6A-CF49AF43E96B/
+
+/ TOOLBASE EXPANSION -> using bash server
+ git -clone a repository 
+ chmod 755 $file 
+ spin up another lighttd server for root / other user / other realm
+ curl website, script etc.
+*/ 
+
+
+/*
+//check for PHP 5 --> is no longer needed as because it is done in the make process.
 $phpversion = floatval(phpversion());
 if ($phpversion < 5) {
 	die("Sorry, but PHP version 5 or above is required to use PadEdit.");
 }
+*/
 
-//define a version, we can also use this to prevent direct access to componant scripts.
+//define a version, we can also use this to prevent direct access to component scripts.
 define('PADEDIT_VERSION', '1.3');
 $version = PADEDIT_VERSION;
 
@@ -32,7 +64,11 @@ session_start();
 require_once("system/functions.php"); // core system object
 $p = new padedit;
 
-//are we logged in?
+/*
+//are we logged in? has been removed because we are running on a local system
+// and a different type of identification has been chosen.
+
+
 if (@$_SESSION["authorised"] === true ) { 
 	//yes we are, but....
 	//have they timed out?
@@ -71,11 +107,9 @@ if (!$loggedin) {
 //controller section. works out what the user is trying to do and performs the necessary functions
 
 
-
-
 // things we can only do if we are logged in
 if ($loggedin){
-
+*/
 	// save file
     if (isset($_GET['save'])) { 
     	$message = $p->saveFile();
