@@ -21,84 +21,6 @@ class padedit {
 
 	// checks for the various action conditions passed as variables in the URL.
 	
-	function login(){
-	
-	    //only need to load this file once per session to check for password
-	    if (file_exists("system/pwd.php")){
-	    	include ("system/pwd.php"); // where the password is stored.
-	    } else {
-	    	$this->logout();
-	    	die('Your PadEdit installation is damaged. Replace it with <a href="http://honestcode.com/padedit/">a known-good copy</a> as soon as possible.');
-	    }
-	
-		if (isset($_GET['login'])) { // user is trying to log in.
-			//Using sha1 due to the popularity of reverse md5 lookup databases
-			if (sha1($_POST['password']) == $pwd) { // does their password match?
-				$_SESSION['authorised'] = true;
-				$_SESSION['lastActive'] = time();
-				session_regenerate_id();
-				header ("Location: index.php?path=../");	// and take them to the editor.
-				exit;
-			} else {
-				header ("Location: index.php?fail=true"); // wrong password.
-				exit;
-			}
-		}
-	}
-	
-	
-	function logout(){
-	
-		// Unset all of the session variables.
-		$_SESSION = array();
-		
-	    if (ini_get("session.use_cookies")) {
-	        $params = session_get_cookie_params();
-	        setcookie(session_name(), '', time() - 42000,
-	            $params["path"], $params["domain"],
-	            $params["secure"], $params["httponly"]
-	        );
-	    }
-		
-	    // Finally, destroy the session.
-		session_destroy();
-	    
-		//redirect them back to login and they will be logged out.
-		header ("Location: index.php");
-		exit;
-	
-	
-	}
-	
-	function savePassword($password) {
-	
-		// Edits a file called system/pwd.php (which is blank as part of the distro) where it stores an 
-		// MD5-hashed version of the password that the user enters during the setup process. PadEdit will 
-		// look at this file when the user logs in and check it against what the user enters.
-	
-		$filename = "system/pwd.php";
-		$contents = "<?php ";
-		$contents .= "// %protect% \n\n";
-		$contents .= "$";
-		$contents .= "pwd = '";
-		$contents .= sha1($password);
-		$contents .= "'; ?>";
-		if (is_writable($filename)) {
-		    if (!$handle = fopen($filename, 'w+')) {
-		         echo "Cannot open file ($filename)";
-		         exit;
-		    }
-		    if (fwrite($handle, $contents) === FALSE) {
-		        echo "Cannot write to file ($filename)";
-		        exit;
-		    }	
-		    fclose($handle);
-		    return true;
-		} else {
-		   	return false;
-		}
-	} // fn savePassword
-	
 	function getFiles($path) {
 	
 		// gets a list of the files in the folder specified in $path.
@@ -179,6 +101,7 @@ class padedit {
 	function uploadFile(){
 	
 		//lets assume the authenticated user isn't trying to hack their own server, for now.
+                //lets assume you can't upload a file. why not git it or take it from somewhere else?
 	
 		$ctrlname    = 'uploadfile';
 		$target_path = $_GET['path'];
@@ -368,47 +291,10 @@ class padedit {
 	
 	
 	
-	
-	// check to see if the initial setup has been completed. 
-	function checkSetup(){
-	
-	    //check for password file
-	    if (file_exists("system/pwd.php")){
-	    	include ("system/pwd.php"); // where the password is stored.
-	    } else {
-	    	die('Your PadEdit installation is damaged. Replace it with <a href="http://honestcode.com/padedit/">a known-good copy</a> as soon as possible.');
-	    }
-	
-	
-		if (isset($pwd)) { 
-			$setup = false; 
-			return $setup; 
-		} else {
-			$setup = true;
-			
-			if (isset($_GET['setpassword'])) { // run the password setup process.
-				if ($_POST['password'] == $_POST['confirmpassword']) { // check to make sure they match.
-					if ($this->savePassword($_POST['password'])) {
-						//send them back to the login screen to login.
-						header ("Location: index.php");
-						exit;
-					} else { // the passwords don't match
-						header ("Location: index.php?perm=true"); // display an error.
-						exit;
-					}
-					
-				} else { // something went wrong.
-					header ("Location: index.php?fail=true");
-					exit;
-				}
-			}
-		}
-		
-		return $setup;
-	}
-	
 	// checks to make sure the user isn't in a folder above PadEdit's parent folder:
-	
+	// unless they are working as root...
+
+
 	function checkPath ($path, $rootPath = "../"){
 		$path = realpath($path); //remove ../'s and get the full path
 		$rootPath = realpath ($rootPath);
