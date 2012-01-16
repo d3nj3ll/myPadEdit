@@ -72,14 +72,14 @@ class padedit {
 	    		$source = htmlentities($source);
 	    	}
 	    	
-//	    	if (strpos($source, "%protect%")) {
-//	    		$source = null;
-//	    		$fileArray['protected'] = true;
-//	    		$fileArray['source'] = null;
-//	    	} else {
+	    	if (strpos($source, "%protect%")) {
+	    		$source = null;
+	    		$fileArray['protected'] = true;
+	    		$fileArray['source'] = null;
+	    	} else {
 	    		$fileArray['protected'] = false;
 	    		$fileArray['source'] = $source;
-//	    	}
+	    	}
 	    	
 	    	$fileArray['is_dir'] = is_dir($path . $filename);
 	    	$fileArray['is_file'] = is_file($path . $filename);
