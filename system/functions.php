@@ -296,14 +296,14 @@ class padedit {
 
 
 	function checkPath ($path, $rootPath = "../"){
-		$path = realpath($path); //remove ../'s and get the full path
+/*		$path = realpath($path); //remove ../'s and get the full path
 		$rootPath = realpath ($rootPath);
 		if (strpos ($path, $rootPath)  === false){
 		   //rootPath is not in the string path, meaning they are trying to go outside the rootPath
 		   return false;
 		}
 	
-	//else
+	//else*/
 	//path is within the root path or below, so let them continue.
 	return true;
 	
