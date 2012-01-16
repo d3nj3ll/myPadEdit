@@ -1,4 +1,4 @@
-<?php // %protect% %system%
+<?php //
 
 /*
  * PadEdit
