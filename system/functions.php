@@ -313,7 +313,7 @@ class padedit {
 	function canEdit($extension){
 	
 		//the type of files that can be edited/viewed
-		$editableFileTypes = array( 'php', 'txt', 'xml',
+		$editableFileTypes = array( 'php', 'txt', 'xml', 'conf', 'json',
 									'html', 'htm', 'js', 
 									'css', 'htaccess'
 									);
