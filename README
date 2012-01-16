@@ -8,6 +8,12 @@
 # 
 ####################################################
 
+IT WORKS!!!
+===========
+It shouldn't come as a huge suprise, but it really works.
+Now just to make it pretty...
+
+
 # but why another text editor? because none of the free ones work for me.
 # why on localhost? some things should still be private.
 # is it faster? it lives on a lighttpd server running php - on your iThing, behind a firewall.
