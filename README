@@ -10,20 +10,43 @@
 
 DISCLAIMER!!!
 =============
-# using this on any server with outside access is VERY dangerous, because there is no password protection and anyone that finds the script can read and modify any of your files... i repeat: this is ONLY to be run on an iPad server. Furthermore, this is not a toy. If you do not know what you are doing, you can and probably will destroy your system. I am not sure how many ways there are to brick your iThing, but this is definitely one of them. BE CAREFUL!!! In the near future I will add a safe mode as default, but right now in this early stage (day3) that is not so important.
+# using this on any server with outside access is VERY dangerous, 
+because there is no password protection and anyone that finds the 
+script can read and modify any of your files... i repeat: this is 
+ONLY to be run on an iPad server. Furthermore, this is not a toy. 
+If you do not know what you are doing, you can and probably will 
+destroy your system. I am not sure how many ways there are to brick 
+your iThing, but this is definitely one of them. BE CAREFUL!!! 
+In the near future I will add a safe mode as default, but right now 
+in this early stage (day3) that is not so important.
 
 IT WORKS!!!
 ===========
-It shouldn't come as a huge suprise, but it really works. And here is a case in point:
-I discovered that the lighttpd.conf was not serving up svg files, but AMAZINGLY neither of my terminals wanted to let me edit and I accidentally :wq from a vim terminal editing the conf that had been contaminated with the wrong characters. Crud. BUT WAIT!!! I still had the server running, so it didn't care about its messed up conf because it had already been configured... So I used myPadEdit, navigated to /etc/lighttpd.conf fixed the file, saved it, restarted lighty from the command line and voila! The SVG's appeared and myPadEdit not only saved the day, but saved itself. I should be crying tears of joy - but instead I'll now add the lighttpd.conf info here and let the games begin.
+It shouldn't come as a huge suprise, but it really works. And here
+is a case in point: I discovered that the lighttpd.conf was not 
+serving up svg files, but AMAZINGLY neither of my terminals wanted 
+to let me edit and I accidentally :wq from a vim terminal editing 
+the conf that had been contaminated with the wrong characters. 
+Crud. BUT WAIT!!! I still had the server running, so it didn't care 
+about its messed up conf because it had already been configured... 
+So I used myPadEdit, navigated to /etc/lighttpd.conf fixed the file, 
+saved it, restarted lighty from the command line and voila! The SVG's 
+appeared and myPadEdit not only saved the day, but saved itself. I 
+should be crying tears of joy - but instead I'll now add the 
+__lighttpd.conf__ info here and let the games begin.
 
 FAQ
 ===
 * but why another text editor? because none of the free ones work for me.
 * why on localhost? some things should still be private.
-* is it faster? it lives on a lighttpd server running php - on your iThing, behind a firewall. so yes, its faster.
-* is it against the law? no, jailbreaking is legal, stealing software is against the law.
-* how do I install it? get your pad jailbroken, install a lighttpd server and php. make a conf file (listed below) clone this  with git into your /var/www folder and open http://localhost/myPadEdit/ in your browser.
+* is it faster? it lives on a lighttpd server running php - on your 
+iThing, behind a firewall. so yes, its faster.
+* is it against the law? no, jailbreaking is legal, stealing software 
+is against the law.
+* how do I install it? get your pad jailbroken, install a lighttpd 
+server and php. make a conf file (listed below) clone this  with git 
+into your /var/www folder and open http://localhost/myPadEdit/ in 
+your browser.
 
 WORDS TO LIVE BY:
 -----------------
