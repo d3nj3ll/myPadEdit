@@ -106,7 +106,7 @@ class padedit {
 		$ctrlname    = 'uploadfile';
 		$target_path = $_GET['path'];
 		if ($target_path == "") {
-			$target_path = "../";
+			$target_path = "/var/www/";
 		}
 		
 		$filename    = explode(".", $_FILES[$ctrlname]['name']);
@@ -116,10 +116,10 @@ class padedit {
 		if (move_uploaded_file($_FILES[$ctrlname]['tmp_name'], $target_path))
 		{
 			if (strpos($filename, ".jpg") or strpos($filename, ".jpeg") or strpos($filename, ".gif") or strpos($filename, ".png")) {
-				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&saved=true&image=true");
+				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&saved=true&image=true".$root);
 				exit;
 			} else {
-				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&saved=true");
+				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&saved=true".$root);
 				exit;
 			}
 		}
@@ -141,10 +141,10 @@ class padedit {
 		if (is_writable($oldname)) {	
 		    rename($oldname, $newname);
 		    if (strpos($newname, ".jpg") or strpos($newname, ".jpeg") or strpos($newname, ".gif") or strpos($newname, ".png")) {
-				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&renamed=true&image=true");
+				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&renamed=true&image=true".$root);
 				exit;
 			} else {
-				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&renamed=true");
+				header ("Location: index.php?path=".$_GET['path']."&file=".$filename."&renamed=true".$root);
 				exit;
 			}
 		}
@@ -165,7 +165,7 @@ class padedit {
 		if (!mkdir($target_path.$_POST['newfoldername'], 0755)) {
 	    	$message = "Cannot create folder ".$_POST['newfoldername']." &mdash; make sure permissions for this folder are at least octal 755.";
 	    } else {
-	    	header ("Location: index.php?path=".$target_path."&foldered=true");
+	    	header ("Location: index.php?path=".$target_path."&foldered=true".$root);
 	    	exit;
 	    }
 	    
@@ -182,7 +182,7 @@ class padedit {
 		
 		$target_path = $_GET['path'];
 		if ($target_path == "") {
-			$target_path = "../";
+			$target_path = "/var/www/";
 		}
 		if (!$handle = fopen($target_path.$_POST['newfilename'], 'a')) {
 	         $message = "Cannot create file".$_POST['newfilename']." &mdash; make sure permissions for this folder are at least octal 755.";
@@ -193,7 +193,7 @@ class padedit {
 	        return $message;
 	    }
 	    fclose($handle);
-	    header ("Location: index.php?path=".$target_path."&file=".$_POST['newfilename']."&saved=true");
+	    header ("Location: index.php?path=".$target_path."&file=".$_POST['newfilename']."&saved=true".$root);
 		exit;
 	}
 	
@@ -204,7 +204,7 @@ class padedit {
 		$filename = $_GET['path'] . $_GET['file'];
 		if (is_writable($filename)) {	
 		    unlink($filename);
-		    header ("Location: index.php?path=".$_GET['path']."&deleted=true");
+		    header ("Location: index.php?path=".$_GET['path']."&deleted=true".$root);
 		    exit;
 		} else {
 		    $message = "$filename can't be deleted &mdash; make sure permissions for this folder are at least octal 755.";
@@ -242,7 +242,7 @@ class padedit {
 		        exit;
 		    }
 		    fclose($handle);
-		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&restored=true");
+		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&restored=true".$root);
 		    exit;
 		} else {
 		    $message = "Could not restore the file $filename.";
@@ -279,7 +279,7 @@ class padedit {
 		        exit;
 		    }
 		    fclose($handle);
-		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true");
+		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true".$root);
 		    exit;
 		} else {
 		    $message = "Could not save the file $filename &mdash; make sure permissions for this folder are at least octal 755.";
@@ -295,7 +295,7 @@ class padedit {
 	// unless they are working as root...
 
 
-	function checkPath ($path, $rootPath = "../"){
+	function checkPath ($path, $rootPath = "/var/www/"){
 /*		$path = realpath($path); //remove ../'s and get the full path
 		$rootPath = realpath ($rootPath);
 		if (strpos ($path, $rootPath)  === false){
@@ -310,6 +310,7 @@ class padedit {
 	}
 	
 	// set a list of file types that can be viewed/edited.
+        // can be overridden by ROOT
 	function canEdit($extension){
 	
 		//the type of files that can be edited/viewed
