@@ -120,7 +120,7 @@ $displaypath = $path;
 			<?php if (isset($message) or $safety) { ?>
 				<div id="message">
 					<?php if (isset($message)) { echo $message; } ?>
-					<?php if ($safety) { echo "Sorry, but that file is protected. <a href='".$_SERVER[]."&user=root'>Become Root?</a>"; } ?>
+					<?php if ($safety) { echo "Sorry, but that file is protected. <a href='".$_SERVER['PHP_SELF']."&user=root'>Become Root?</a>"; } ?>
 				</div>
 			<?php } ?>
 			<?php if (isset($_GET['image'])) { ?>			
