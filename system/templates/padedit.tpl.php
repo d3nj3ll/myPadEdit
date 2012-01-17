@@ -89,7 +89,7 @@ $displaypath = $path;
 <span style="float:right; margin-top:20px;padding:5px;border:solid 3px #444;background:#aaa;color:#444">
 <?php if (!isset($root)) { 
 if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
-print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root" style="color:#444;font-decoration:none">WEBUSER</a>';}else{print'ROOT';} ?>
+print'<a href="'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'].$callstring.'user=root" style="color:#444;font-decoration:none">WEBUSER</a>';}else{print'ROOT';} ?>
 </span>			
 			<div class="toolbar" style="text-align:center">
 				<span style="float: left; line-height: 41px;">
