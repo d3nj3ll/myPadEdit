@@ -114,8 +114,7 @@ $displaypath = $path;
 
 
 if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
-print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root" class="button">WEBUSER</a>';
-WEBUSER';}else{print'ROOT';} ?>
+print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root">WEBUSER</a>';}else{print'ROOT';} ?>
 </span>
 
 <!--					<a href="index.php?logout=true"><img src="system/images/logout.svg" alt="logout" title="Log out"/></a>-->
