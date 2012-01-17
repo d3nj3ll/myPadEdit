@@ -69,8 +69,8 @@ class padedit {
 	
 	
 	// returns file details including file source, unless it is protected with the %protect% string.
-	function getFileDetails($path, $filename, $entities = true){
-	
+	function getFileDetails($path, $filename, $entities = false){
+	// turned entities off
 		if (file_exists($path . $filename)){
 		
 			$fileArray = pathinfo($path . $filename);
@@ -81,9 +81,9 @@ class padedit {
 	    	if ($entities) {
 
 // trying to figure out where the non utf-8 problem lies
-	    		$source = htmlentities($source);
+//	    		$source = htmlentities($source);
 
-//	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8");
+	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8"); // need this, but its slow.
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
