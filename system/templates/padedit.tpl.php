@@ -86,7 +86,11 @@ $displaypath = $path;
 		</div> <!-- sidebar -->
 		<div id="editor">
 			<h1 class="inactive"><?php if (isset($_GET['file'])) { echo $_GET['file']; } else { echo "myPadEdit " . $version; } ?></h1>
-			
+<span style="float:right; margin-top:20px;padding:5px;border:solid 3px #444;background:#aaa;color:#444">
+<?php if (!isset($root)) { 
+if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
+print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root" style="color:#444;font-decoration:none">WEBUSER</a>';}else{print'ROOT';} ?>
+</span>			
 			<div class="toolbar" style="text-align:center">
 				<span style="float: left; line-height: 41px;">
 					<?php if (!$safety && $fileEditable ) { ?>
@@ -111,13 +115,7 @@ $displaypath = $path;
 					<?php } ?>
 				</span>
 				<span style="float: right; line-height: 41px;">
-<span style="padding:5px;border:solid 3px #444;background:#aaa;color:#444">
-<?php if (!isset($root)) { 
 
-
-if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
-print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root">WEBUSER</a>';}else{print'ROOT';} ?>
-</span>
 
 <!--					<a href="index.php?logout=true"><img src="system/images/logout.svg" alt="logout" title="Log out"/></a>-->
 				</span>
