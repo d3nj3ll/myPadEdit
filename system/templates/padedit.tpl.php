@@ -109,8 +109,10 @@ $displaypath = $path;
 					<?php } ?>
 				</span>
 				<span style="float: right; line-height: 41px;">
-<span style="padding:15px;border:solid 3px #fff;background:#000;color:#aaa">
-<?php if (!isset($root)) { print'WEBUSER';}else{print'ROOT';} ?>
+<span style="padding:5px;border:solid 3px #444;background:#aaa;color:#444">
+<?php if (!isset($root)) { 
+print'<a href="'.$_SERVER["PHP_SELF"].$root'" class="button">WEBUSER</a>';
+WEBUSER';}else{print'ROOT';} ?>
 </span>
 
 <!--					<a href="index.php?logout=true"><img src="system/images/logout.svg" alt="logout" title="Log out"/></a>-->
