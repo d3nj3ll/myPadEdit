@@ -29,9 +29,10 @@ session_start();
 if ($_GET['user'] == 'root'){
   // might be nice to force some kind of challenge like password etc.
   global $root;
+    if(empty($_GET)) {
   $root = '&user=root';
   //  require_once('system/root.php'); //extra features like BASH, moving up the ../../ ladder etc.
-}
+}   
 
 
 require_once("system/functions.php"); // core system object
@@ -150,7 +151,7 @@ if ($loggedin){
     		//$safety = true;
     		$fileLoaded = false;
     		$editfile =  '';
-    		$message = "Sorry, You can't edit this type of file. Become <a href='".$_SERVER['php_self']."&user=root'> ROOT</a>?"; // 
+    		$message = "Sorry, You can't edit this type of file. Become <a href='".$_SERVER['PHP_SELF']."&user=root'> ROOT</a>?"; // 
 
 		}
 	}
