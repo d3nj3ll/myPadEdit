@@ -19,12 +19,6 @@ if (!defined('PADEDIT_VERSION')){
 
 global $root;
 
-function root($root) {
-  if (isset($root)){
-    if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
-    return $callstring.'user=root';
-  }
-}
 
 class padedit {
 
@@ -288,7 +282,7 @@ class padedit {
 		        exit;
 		    }
 		    fclose($handle);
-		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true".root());
+		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true".$root);
 		    exit;
 		} else {
 		    $message = "Could not save the file $filename &mdash; make sure permissions for this folder are at least octal 755.";
