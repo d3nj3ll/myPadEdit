@@ -18,6 +18,8 @@ if (!defined('PADEDIT_VERSION')){
 	exit;
 }
 
+global $root;
+
 ?>
 <ul id="afilelist">
 <?php
