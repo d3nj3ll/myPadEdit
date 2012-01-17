@@ -111,7 +111,10 @@ $displaypath = $path;
 				<span style="float: right; line-height: 41px;">
 <span style="padding:5px;border:solid 3px #444;background:#aaa;color:#444">
 <?php if (!isset($root)) { 
-print'<a href="'.$_SERVER["PHP_SELF"].$root'" class="button">WEBUSER</a>';
+
+
+if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
+print'<a href="'.$_SERVER["PHP_SELF"].$callstring.'user=root" class="button">WEBUSER</a>';
 WEBUSER';}else{print'ROOT';} ?>
 </span>
 
