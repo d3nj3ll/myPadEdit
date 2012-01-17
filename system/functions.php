@@ -67,7 +67,7 @@ class padedit {
 	
 	
 	
-	// returns file details inclusing file source, unless it is protected with the %protect% string.
+	// returns file details including file source, unless it is protected with the %protect% string.
 	function getFileDetails($path, $filename, $entities = true){
 	
 		if (file_exists($path . $filename)){
@@ -78,7 +78,7 @@ class padedit {
 			
 	    	$source = file_get_contents($path . $filename);
 	    	if ($entities) {
-	    		$source = htmlentities($source, "UTF-8");
+	    		$source = htmlentities($source);
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
