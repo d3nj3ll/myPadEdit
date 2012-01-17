@@ -19,7 +19,6 @@ if (!defined('PADEDIT_VERSION')){
 }
 
 global $root;
-include functions.php
 
 ?>
 <ul id="afilelist">
