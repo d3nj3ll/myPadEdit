@@ -78,7 +78,7 @@ class padedit {
 			
 	    	$source = file_get_contents($path . $filename);
 	    	if ($entities) {
-	    		$source = htmlentities($source);
+	    		$source = htmlentities($source, "UTF-8");
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
@@ -174,7 +174,7 @@ class padedit {
 		if (!mkdir($target_path.$_POST['newfoldername'], 0755)) {
 	    	$message = "Cannot create folder ".$_POST['newfoldername']." &mdash; make sure permissions for this folder are at least octal 755.";
 	    } else {
-	    	header ("Location: index.php?path=".$target_path."&foldered=true".$root);
+	    	header ("Location: index.php?path=".$target_path."&foldered=true".root());
 	    	exit;
 	    }
 	    
@@ -202,7 +202,7 @@ class padedit {
 	        return $message;
 	    }
 	    fclose($handle);
-	    header ("Location: index.php?path=".$target_path."&file=".$_POST['newfilename']."&saved=true".$root);
+	    header ("Location: index.php?path=".$target_path."&file=".$_POST['newfilename']."&saved=true".root());
 		exit;
 	}
 	
@@ -213,7 +213,7 @@ class padedit {
 		$filename = $_GET['path'] . $_GET['file'];
 		if (is_writable($filename)) {	
 		    unlink($filename);
-		    header ("Location: index.php?path=".$_GET['path']."&deleted=true".$root);
+		    header ("Location: index.php?path=".$_GET['path']."&deleted=true".root());
 		    exit;
 		} else {
 		    $message = "$filename can't be deleted &mdash; make sure permissions for this folder are at least octal 755.";
@@ -288,7 +288,7 @@ class padedit {
 		        exit;
 		    }
 		    fclose($handle);
-		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true".$root);
+		    header ("Location: index.php?path=".$_GET['path']."&file=".$_GET['file']."&saved=true".root());
 		    exit;
 		} else {
 		    $message = "Could not save the file $filename &mdash; make sure permissions for this folder are at least octal 755.";
