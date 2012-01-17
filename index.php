@@ -115,10 +115,10 @@ if ($loggedin){
     } elseif (isset($root)) {
         $path = "/";
     } else {
-    	$path = "/var/www";  
+    	$path = "/var/www/";  
     }
     if (!$p->checkPath($path)) { 
-    	header("Location: index.php?path=/var/www"); 
+    	header("Location: index.php?path=/var/www/".$root); 
     	exit;
     } 
     
@@ -130,10 +130,6 @@ if ($loggedin){
 
 	//check if they should be editing this file
 
-/*
-also an important feature, that I would sometimes like to override.
-see notes above.
-*/
   if (!isset($root)) {
 
 	if ($fileDetails['protected'] == true ) {
@@ -147,14 +143,14 @@ see notes above.
 	
 	if ($fileDetails['is_file']  && $fileDetails['is_writable']){
 		//Need to check the type of file and only allow files that can be edited to be loaded in editor.
-                //Unless we are root, then fuck off.
+     
 		$fileEditable = $p->canEdit($fileDetails['extension']);
 
 		if (!$fileEditable){
     		//$safety = true;
     		$fileLoaded = false;
     		$editfile =  '';
-    		$message = "Sorry, You can't edit this type of file."; // 
+    		$message = "Sorry, You can't edit this type of file. Become <a href='".$_SERVER['php_self']."&user=root'> ROOT</a>?"; // 
 
 		}
 	}
