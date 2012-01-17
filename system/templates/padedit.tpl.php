@@ -129,7 +129,7 @@ print'<a href="'.$_SERVER['REQUEST_URI'].root("root").'" style="color:#444;font-
 			<?php if (isset($_GET['image'])) { ?>			
 				<div align="center" style="margin: 20px auto;"><img src="<?php echo $_GET['path'].$_GET['file'];?>" alt="<?php echo $_GET['file'] ?>"></div>
 			<?php } else if (!$safety) { ?>
-				<form name="editor" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true"<?php print $root ?> method="post">
+				<form name="editor" accept-charset="UTF-8" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true"<?php print $root ?> method="post">
 					<textarea name="filetxt" id="filetxt" cols="25" rows="200"><?php if ($editfile) { echo $editfile; } ?></textarea>
 				</form>
 				<br style="clear:both;" />
