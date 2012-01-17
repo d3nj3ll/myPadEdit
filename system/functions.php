@@ -287,7 +287,7 @@ class padedit {
 		         $message = "Cannot open file ($filename)";
 		         exit;
 		    }
-		    if (fwrite($handle, stripslashes(utf8_encode($_POST['filetxt']))) === FALSE) {
+		    if (fwrite($handle, stripslashes($_POST['filetxt'])) === FALSE) {
 		        $message = "Cannot write to file ($filename)";
 		        exit;
 		    }
