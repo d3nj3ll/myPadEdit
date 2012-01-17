@@ -81,8 +81,9 @@ class padedit {
 	    	if ($entities) {
 
 // trying to figure out where the non utf-8 problem lies
+	    		$source = htmlentities($source);
 
-	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8");
+//	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8");
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
