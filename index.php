@@ -162,7 +162,6 @@ see notes above.
 	$editfile =  $fileDetails['source'];
    }
 }
-}
 
 // load the template
 require_once("system/templates/padedit.tpl.php");
