@@ -33,7 +33,7 @@ if (!defined('PADEDIT_VERSION')){
                 <link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
-	<title>PadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
+	<title>myPadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
 	<script type="text/javascript" src="system/js/jquery-linedtextarea.js"></script>
 	<script type="text/javascript" src="system/js/editor.js"></script>
 	<script type="text/javascript">
@@ -61,7 +61,7 @@ if (!defined('PADEDIT_VERSION')){
 			<h1><?php if ($path != "../") { $pos = strrpos(substr($path, 0, -1), "/"); 
 					?><a href="index.php?path=<?php echo substr($path, 0, $pos);?>/" class="btn"><img src="system/images/arrow.svg" alt="Parent Folder" title="Parent Folder" width="14" height="14" /></a><?php
 				 } 
-					$displaypath = substr($path, strpos($path, "../")+3); 
+					$displaypath = $path; 
 					if ($displaypath) { echo $displaypath; } else { echo "&nbsp;"; } ?></h1>
 			<div class="toolbar">
 				<div id="resize" unselectable="on" onclick="void(0)">&nbsp;</div>
@@ -81,7 +81,7 @@ if (!defined('PADEDIT_VERSION')){
 			 ?>
 		</div> <!-- sidebar -->
 		<div id="editor">
-			<h1 class="inactive"><?php if (isset($_GET['file'])) { echo $_GET['file']; } else { echo "PadEdit " . $version; } ?></h1>
+			<h1 class="inactive"><?php if (isset($_GET['file'])) { echo $_GET['file']; } else { echo "myPadEdit " . $version; } ?></h1>
 			
 			<div class="toolbar" style="text-align:center">
 				<span style="float: left; line-height: 41px;">
