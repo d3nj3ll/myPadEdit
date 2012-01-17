@@ -23,7 +23,7 @@ if (!defined('PADEDIT_VERSION')){
 <?php
 $files = $p->getFiles($path); // gets files based on the string passed in the URL. $path is set in index.php
 $backups = array(); // creates an empty array for the backups stored in the folder $path
-$padeditfolder = substr($_SERVER['REQUEST_URI'], 1, strpos($_SERVER['REQUEST_URI'], "/index.php")-1); // determines the name of the padedit folder part 1
+//$padeditfolder = substr($_SERVER['REQUEST_URI'], 1, strpos($_SERVER['REQUEST_URI'], "/index.php")-1); // determines the name of the padedit folder part 1
 
 foreach ($files as $file) {
 	$filesize = round(filesize($path.$file['name']) / 1024,2); // determines file size
@@ -47,12 +47,12 @@ foreach ($files as $file) {
 						<a href='".$path.$file['name'] ."' rel='file' class='file filelink' title='".$filesize."K'>" . $file['name'] ."</a>
 					   </li>");
 			}
-		} else { 
-			if ($file['name'] != $padeditfolder) { 
-				// display a folder in the file list (so long as it isn't the padedit folder)
-				echo ("<li id='a".substr($file['name'],0,strpos($file['name'], "."))."'><b>
-				         <a href='" . $path.$file['name']."/' class='folder filelink' rel='folder'>" . $file['name']. "</a></b>
-				       </li>");	
+//		} else { 
+//			if ($file['name'] != $padeditfolder) { 
+//				// display a folder in the file list (so long as it isn't the padedit folder)
+//				echo ("<li id='a".substr($file['name'],0,strpos($file['name'], "."))."'><b>
+//				         <a href='" . $path.$file['name']."/' class='folder filelink' rel='folder'>" . $file['name']. "</a></b>
+//				       </li>");	
 			}
 		} // file types
 	} else { 
