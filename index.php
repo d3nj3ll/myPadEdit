@@ -115,10 +115,10 @@ if ($loggedin){
     } elseif (isset($root)) {
         $path = "/";
     } else {
-    	$path = "/var/www";  
+    	$path = "../";  
     }
     if (!$p->checkPath($path)) { 
-    	header("Location: index.php?path=/var/www"); 
+    	header("Location: index.php?path=../"); 
     	exit;
     } 
     
