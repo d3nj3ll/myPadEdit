@@ -7,7 +7,7 @@
  * http://www.gnu.org/licenses/gpl.txt
  *
  * Date: 2012-1-16
- * Version: 1.3-1
+ * Version: 1.3.1.alpha
  *
  */
  
