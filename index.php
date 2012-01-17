@@ -29,7 +29,7 @@ session_start();
 if ($_GET['user'] == 'root'){
   // might be nice to force some kind of challenge like password etc.
   global $root;
-  $root = true;
+  $root = '&user=root';
   //  require_once('system/root.php'); //extra features like BASH, moving up the ../../ ladder etc.
 }
 
@@ -85,7 +85,7 @@ if ($loggedin){
     
     // confirmation messages
     if (isset($_GET['saved'])) {
-    	$message = "File saved. <a href='".$_GET['path'].$_GET['file']."' target='_blank'>View file.</a>";
+    	$message = "File saved. <a href='".$_GET['path'].$_GET['file'].$root."' target='_blank'>View file.</a>";
     }
     
     if (isset($_GET['deleted'])) {
@@ -93,7 +93,7 @@ if ($loggedin){
     }
     
     if (isset($_GET['renamed'])) {
-    	$message = "File renamed. <a href='".$_GET['path'].$_GET['file']."' target='_blank'>View file.</a>";
+    	$message = "File renamed. <a href='".$_GET['path'].$_GET['file'].$root."' target='_blank'>View file.</a>";
     }
     
     if (isset($_GET['foldered'])) {
@@ -115,10 +115,10 @@ if ($loggedin){
     } elseif (isset($root)) {
         $path = "/";
     } else {
-    	$path = "../";  
+    	$path = "/var/www";  
     }
     if (!$p->checkPath($path)) { 
-    	header("Location: index.php?path=../"); 
+    	header("Location: index.php?path=/var/www"); 
     	exit;
     } 
     
