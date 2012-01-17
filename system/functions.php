@@ -79,7 +79,10 @@ class padedit {
 			
 	    	$source = file_get_contents($path . $filename);
 	    	if ($entities) {
-	    		$source = htmlentities($source);
+
+// trying to figure out where the non utf-8 problem lies
+
+	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8");
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
