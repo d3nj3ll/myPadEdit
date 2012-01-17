@@ -41,7 +41,7 @@ foreach ($files as $file) {
 			if (strpos($file['name'], ".jpg") or strpos($file['name'], ".jpeg") or strpos($file['name'], ".gif") or strpos($file['name'], ".png")) { 
 				// display an image in the file list
 				echo ("<li id='a".substr($file['name'],0,strpos($file['name'], "."))."'>
-						<a href='".$path.$file['name'].root()"' rel='image' class='image filelink' title='".$filesize."K'>" . $file['name']. '</a>
+						<a href='".$path.$file['name'].root()."' rel='image' class='image filelink' title='".$filesize."K'>" . $file['name']. '</a>
 					   </li>');
 			} else { 
 				// display an editable file in the file list
