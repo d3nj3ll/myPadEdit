@@ -30,7 +30,7 @@ if ($_GET['user'] == 'root'){
   // might be nice to force some kind of challenge like password etc.
   global $root;
   //  if(empty($_GET)) {
-  $root = '&user=root';
+  $root = '&amp;user=root';
   //  require_once('system/root.php'); //extra features like BASH, moving up the ../../ ladder etc.
 }   
 
