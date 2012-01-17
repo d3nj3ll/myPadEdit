@@ -2,19 +2,17 @@
 /**
  * PadEdit
  *
- * Copyright (c) 2010 Honest Code.
+ * Copyright (c) 2010 Honest Code && (c) 2012 D3NJ3LL
  * Licensed under the GPL license.
  * http://www.gnu.org/licenses/gpl.txt
  *
- * Date: 2012-1-15
+ * Date: 2012-1-16
  * Version: 1.3-1
  *
  */
  
 
 /*
-/ Do we need this kind of pseudo security on our own device?
-/ It is unnecesary codebulk that inludes extra files. Weg damit.
 / Remember what denjell says: "A cycle saved is cache earned."
 
 / LIGHTTD CONFIG ISSUES
@@ -47,7 +45,7 @@ PERFORMANCE ISSUES
 */ 
 
 //define a version, we can also use this to prevent direct access to component scripts.
-define('PADEDIT_VERSION', '1.3');
+define('PADEDIT_VERSION', '1.3.1.alpha');
 $version = PADEDIT_VERSION;
 
 //set some values to avoid undefined notices
@@ -152,10 +150,10 @@ if ($loggedin){
     if (isset($_GET['path'])) { 
     	$path = $_GET['path']; 
     } else { 
-    	$path = "../"; 
+    	$path = "/var/www";  
     }
     if (!$p->checkPath($path)) { 
-    	header("Location: index.php?path=../"); 
+    	header("Location: index.php?path=/var/www"); 
     	exit;
     } 
     
