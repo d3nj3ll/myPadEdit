@@ -19,6 +19,11 @@ if (!defined('PADEDIT_VERSION')){
 
 global $root;
 
+function root($root) {
+ if(empty($_GET)) {$callstring="?";}else{$callstring="&";}
+ return $callstring.'user=root';
+}
+
 class padedit {
 
 	// checks for the various action conditions passed as variables in the URL.
