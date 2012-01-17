@@ -8,7 +8,7 @@
  * http://www.gnu.org/licenses/gpl.txt
  *
  * Date: 2010-12-25
- * Version: 1.3-1
+ * Version: 1.3-1.0 Alpha
  *
  */
 
@@ -33,7 +33,7 @@ if (!defined('PADEDIT_VERSION')){
                 <link href="system/styles.css" rel="stylesheet" type="text/css" />
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
-	<title>PadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
+	<title>myPadEdit <?php if (isset($_GET['file'])) echo " &middot; ". $_GET['file']; echo " &middot; " . $_SERVER['HTTP_HOST'];  ?></title>
 	<script type="text/javascript" src="system/js/jquery-linedtextarea.js"></script>
 	<script type="text/javascript" src="system/js/editor.js"></script>
 	<script type="text/javascript">
@@ -58,10 +58,12 @@ if (!defined('PADEDIT_VERSION')){
 	
 	<div id="container">
 		<div id="sidebar">
-			<h1><?php if ($path != "../") { $pos = strrpos(substr($path, 0, -1), "/"); 
+			<h1><?php if ($path != "/var/www/") { $pos = strrpos(substr($path, 0, -1), "/"); 
 					?><a href="index.php?path=<?php echo substr($path, 0, $pos);?>/" class="btn"><img src="system/images/arrow.svg" alt="Parent Folder" title="Parent Folder" width="14" height="14" /></a><?php
 				 } 
-					$displaypath = substr($path, strpos($path, "../")+3); 
+
+$displaypath = $path;
+//					$displaypath = substr($path, strpos($path, "../")+3); 
 					if ($displaypath) { echo $displaypath; } else { echo "&nbsp;"; } ?></h1>
 			<div class="toolbar">
 				<div id="resize" unselectable="on" onclick="void(0)">&nbsp;</div>
@@ -107,20 +109,24 @@ if (!defined('PADEDIT_VERSION')){
 					<?php } ?>
 				</span>
 				<span style="float: right; line-height: 41px;">
-					<a href="index.php?logout=true"><img src="system/images/logout.svg" alt="logout" title="Log out"/></a>
+<span style="padding:15px;border:solid 3px #fff;background:#000;color:#aaa">
+<?php if (!isset($root)) { print'WEBUSER';}else{print'ROOT';} ?>
+</span>
+
+<!--					<a href="index.php?logout=true"><img src="system/images/logout.svg" alt="logout" title="Log out"/></a>-->
 				</span>
 			</div>
 			
 			<?php if (isset($message) or $safety) { ?>
 				<div id="message">
 					<?php if (isset($message)) { echo $message; } ?>
-					<?php if ($safety) { echo "Sorry, but that file is protected. You can't edit it."; } ?>
+					<?php if ($safety) { echo "Sorry, but that file is protected. <a href='".$_SERVER[]."&user=root'>Become Root?</a>"; } ?>
 				</div>
 			<?php } ?>
 			<?php if (isset($_GET['image'])) { ?>			
 				<div align="center" style="margin: 20px auto;"><img src="<?php echo $_GET['path'].$_GET['file'];?>" alt="<?php echo $_GET['file'] ?>"></div>
 			<?php } else if (!$safety) { ?>
-				<form name="editor" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true" method="post">
+				<form name="editor" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true"<?php print $root ?> method="post">
 					<textarea name="filetxt" id="filetxt" cols="25" rows="200"><?php if ($editfile) { echo $editfile; } ?></textarea>
 				</form>
 				<br style="clear:both;" />
@@ -131,19 +137,19 @@ if (!defined('PADEDIT_VERSION')){
 	<!-- popups -->
 	
 	<div id="newfolderinfo" class="popup" style="display:none;">
-		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;newfolder=true" method="post">
+		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;newfolder=true<?php print $root ?>" method="post">
 			<input id="newfoldername" name="newfoldername" type="text"/>
 			<input name="submit" type="submit" value="Create New Folder"/> &nbsp; <a href="#" id="newfoldercancel" style="float:right; margin-top: 3px;">Cancel</a>
 		</form>
 	</div>
 	<div id="newfileinfo" class="popup" style="display:none;">
-		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;newfile=true" method="post">
+		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;newfile=true<?php print $root ?>" method="post">
 			<input id="newfilename" name="newfilename" type="text"/>
 			<input name="submit" type="submit" value="Create New File"/> &nbsp; <a href="#" id="newfilecancel" style="float:right; margin-top: 3px;">Cancel</a>
 		</form>
 	</div>
 	<div id="uploadfileinfo" class="popup" style="display:none;">
-		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;upload=true" enctype="multipart/form-data" method="post">
+		<form action="index.php?path=<?php echo $_GET['path'];?>&amp;upload=true<?php print $root ?>" enctype="multipart/form-data" method="post">
 			<input name="uploadfile" type="file"/>
 			<input name="submit" type="submit" value="Upload"/> &nbsp; <a href="#" id="uploadcancel" style="float:right; margin-top: 3px;">Cancel</a>
 		</form>
@@ -152,11 +158,11 @@ if (!defined('PADEDIT_VERSION')){
 	<div id="areyousure" class="popup" style="display: none;">
 		<strong style="color: #ffe856;">This file will be deleted permanently. </strong>
 		<a href="#" id="deleteCancel" style="float:right;">Cancel</a> 
-		<a href="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;delete=true" class="doDelete">Delete</a>
+		<a href="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;delete=true<?php print $root ?>" class="doDelete">Delete</a>
 	</div>
 	
 	<div id="renamefile" class="popup" style="display: none;">
-		<form action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;rename=true" method="post">
+		<form action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;rename=true<?php print $root ?>" method="post">
 			<input id="filename" name="filename" type="text" value="<?php echo $_GET['file'] ?>"/>
 			<input name="submit" type="submit" value="Rename File"/> &nbsp; <a href="#" id="renameCancel" style="float:right; margin-top: 3px;">Cancel</a>
 		</form>
@@ -181,7 +187,7 @@ if (!defined('PADEDIT_VERSION')){
 					<tr id="v<?php echo $info[2];?>">				
 					<td>Version saved <?php echo date("Y F j, g:i A", $info[2]);?></td>
 					<td align="right"><a class="viewbackup" rel="v<?php echo $info[2];?>" href="<?php echo $_GET['path'].$b['name'];?>">View</a></td>
-					<td align="right"><a href="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;restore=<?php echo $info[2];?>">Restore</a></td>
+					<td align="right"><a href="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;restore=<?php echo $info[2];?><?php print $root ?>">Restore</a></td>
 					</tr>
 			<?php	}
 			echo "</table>"; 
