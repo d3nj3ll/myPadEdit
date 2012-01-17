@@ -86,7 +86,7 @@ $displaypath = $path;
 		</div> <!-- sidebar -->
 		<div id="editor">
 			<h1 class="inactive"><?php if (isset($_GET['file'])) { echo $_GET['file']; } else { echo "myPadEdit " . $version; } ?></h1>
-<span style="position:absolute;top:10px;right:10px;padding:5px;border:solid 3px #444;background:#aaa;color:#444">
+<span style="position:absolute;top:8px;right:8px;padding:5px;border:solid 3px #444;background:#aaa;color:#444">
 <?php if (!isset($root)) { 
 print'<a href="'.$_SERVER['REQUEST_URI'].root("root").'" style="color:#444;font-weight:800;text-decoration:none">WEBUSER</a>';}else{print'ROOT';} ?>
 </span>			
@@ -123,13 +123,13 @@ print'<a href="'.$_SERVER['REQUEST_URI'].root("root").'" style="color:#444;font-
 			<?php if (isset($message) or $safety) { ?>
 				<div id="message">
 					<?php if (isset($message)) { echo $message; } ?>
-					<?php if ($safety) { echo "Sorry, but that file is protected. <a href='".$_SERVER['PHP_SELF']."&user=root'>Become Root?</a>"; } ?>
+					<?php if ($safety) { echo "Sorry, but that file is protected. <a href='".$_SERVER['REQUEST_URI']."&user=root'>Become Root?</a>"; } ?>
 				</div>
 			<?php } ?>
 			<?php if (isset($_GET['image'])) { ?>			
 				<div align="center" style="margin: 20px auto;"><img src="<?php echo $_GET['path'].$_GET['file'];?>" alt="<?php echo $_GET['file'] ?>"></div>
 			<?php } else if (!$safety) { ?>
-				<form name="editor" accept-charset="UTF-8" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true"<?php print $root ?> method="post">
+				<form name="editor" accept-charset="UTF-8" id="editform" action="index.php?path=<?php echo $_GET['path'] ?>&amp;file=<?php echo $_GET['file'] ?>&amp;save=true<?php print $root ?>" method="post">
 					<textarea name="filetxt" id="filetxt" cols="25" rows="200"><?php if ($editfile) { echo $editfile; } ?></textarea>
 				</form>
 				<br style="clear:both;" />
