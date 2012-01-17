@@ -17,6 +17,8 @@ if (!defined('PADEDIT_VERSION')){
 	exit;
 }
 
+global $root;
+
 class padedit {
 
 	// checks for the various action conditions passed as variables in the URL.
