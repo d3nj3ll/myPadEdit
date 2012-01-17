@@ -151,7 +151,7 @@ if ($loggedin){
     		//$safety = true;
     		$fileLoaded = false;
     		$editfile =  '';
-    		$message = "Sorry, You can't edit this type of file. Become <a href='".$_SERVER['REQUEST_URI'].root()."'> ROOT?</a>"; // 
+    		$message = "Sorry, You can't edit this type of file. Become <a href='".$_SERVER['REQUEST_URI'].root('root')."'> ROOT?</a>"; // 
 
 		}
 	}
