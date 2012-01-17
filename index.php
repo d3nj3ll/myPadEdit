@@ -7,45 +7,12 @@
  * http://www.gnu.org/licenses/gpl.txt
  *
  * Date: 2012-1-16
- * Version: 1.3.1.alpha
+ * Version: 1.3-1.0 alpha
  *
  */
  
-
-/*
-/ Remember what denjell says: "A cycle saved is cache earned."
-
-/ LIGHTTD CONFIG ISSUES
- PHP must work.
- To be secure, it is better to write the server configs securely.
- This may mean using a certain port for root and otherwise doing it with just webuser...
- use service patching in the lighttd config file:
- http://localhost:8120/Applications/81FB3553-07D0-4611-9A6A-CF49AF43E96B/?newfolder=assets&chmod=755
- can use the device id as a cross-check to find out if browser on localhost isIpad()? 
-
-PERFORMANCE ISSUES
-/ Write some pragmacache headers to prevent reloading the page EVER
-/ Put useless code in other include files so the tree can remain stable.
-/ NOTIFY WINDOW OF ITS REALM AND USER
-/ Home is where node.js lives.
-
-/ add a GET_['realm'] key for something like: 
- http://localhost:8120/?realm=/Applications/81FB3553-07D0-4611-9A6A-CF49AF43E96B/
-
-/ TOOLBASE EXPANSION -> using bash server
- git -clone a repository 
- chmod 755 $file 
- spin up another lighttd server for root / other user / other realm
- curl website, script etc.
-
-/ FILE PROTECTION
- i suggest we use two internal tags:
- %system% and %protected% (system cannot edit %system% files, but user can override %protected%
- would also be nice to display a lock on the protected file in the list.
-*/ 
-
 //define a version, we can also use this to prevent direct access to component scripts.
-define('PADEDIT_VERSION', '1.3.1.alpha');
+define('PADEDIT_VERSION', '1.3-1.0 alpha');
 $version = PADEDIT_VERSION;
 
 //set some values to avoid undefined notices
@@ -56,25 +23,19 @@ $safety = false;
 session_set_cookie_params('0','/', null , false, true); 
 session_start(); 
 
-/*
-// switch it up if user is on localhost
-if ($_GLOBAL['server_uri'] === 'localhost'){
-  require_once('system/localhost.php'); //extra features like BASH, etc.
-
-}else{ 
-  require_once('system/server.php'); //the login stuff and php5 checking for non-localhost servers
+// switch it up if user wants root-like access
+if ($_GET['user'] == 'root'){
+  // might be nice to force some kind of challenge like password etc.
+  global $root;
+  $root = true;
+  //  require_once('system/root.php'); //extra features like BASH, moving up the ../../ ladder etc.
 }
-*/
+
 
 require_once("system/functions.php"); // core system object
 $p = new padedit;
 
-
-
-
 //controller section. works out what the user is trying to do and performs the necessary functions
-
-
 // things we can only do if we are logged in
 $loggedin=1;
 // -> is carried over for the time being, will migrate to localhost.php and server.php, perhaps base.php
@@ -149,7 +110,9 @@ if ($loggedin){
 	//make sure we have a path
     if (isset($_GET['path'])) { 
     	$path = $_GET['path']; 
-    } else { 
+    } elseif (isset($root)) {
+        $path = "/";
+    } else {
     	$path = "/var/www";  
     }
     if (!$p->checkPath($path)) { 
@@ -169,11 +132,12 @@ if ($loggedin){
 also an important feature, that I would sometimes like to override.
 see notes above.
 */
+  if (!isset($root)) {
 
-	if ($fileDetails['protected'] == true ) { 
+	if ($fileDetails['protected'] == true ) {
 		$safety = true;
 		$fileLoaded = false;
-	} else { 
+	} else {
 		$safety = false;
 		$fileLoaded = true;
 		$editfile =  $fileDetails['source'];
@@ -181,6 +145,7 @@ see notes above.
 	
 	if ($fileDetails['is_file']  && $fileDetails['is_writable']){
 		//Need to check the type of file and only allow files that can be edited to be loaded in editor.
+                //Unless we are root, then fuck off.
 		$fileEditable = $p->canEdit($fileDetails['extension']);
 
 		if (!$fileEditable){
@@ -191,6 +156,12 @@ see notes above.
 
 		}
 	}
+   } else {
+        $safety=false;
+	$fileLoaded = true;
+	$editfile =  $fileDetails['source'];
+   }
+}
 }
 
 // load the template
