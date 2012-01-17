@@ -86,7 +86,7 @@ function root($root) {
 // trying to figure out where the non utf-8 problem lies
 //	    		$source = htmlentities($source);
 
-	    		$source = htmlentities($source,ENT_COMPAT,"UTF-8"); // need this, but its slow.
+	    		$source = htmlentities($source,ENT_HTML5,"UTF-8"); // need this, but its slow.
 	    	}
 	    	
 	    	if (strpos($source, "%protect%")) {
