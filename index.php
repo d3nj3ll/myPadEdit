@@ -1,4 +1,6 @@
-<?php // %protect%
+<?php 
+error_reporting(0);
+// %protect%
 /**
  * PadEdit
  *
